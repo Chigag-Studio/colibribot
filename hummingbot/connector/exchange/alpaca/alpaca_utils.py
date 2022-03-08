@@ -72,7 +72,7 @@ KEYS = {
                   is_secure=True,
                   is_connect_key=True),
     "alpaca_api_secret":
-        ConfigVar(key="binance_api_secret",
+        ConfigVar(key="alpaca_api_secret",
                   prompt="Enter your Alpaca API secret >>> ",
                   required_if=using_exchange("alpaca"),
                   is_secure=True,

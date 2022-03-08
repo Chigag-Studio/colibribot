@@ -38,6 +38,8 @@ class AlpacaOrderBookMessage(OrderBookMessage):
             return int(self.timestamp)
         return -1
 
+
+#will default in this loop to symbol only
     @property
     def trading_pair(self) -> str:
         if "trading_pair" in self.content:
