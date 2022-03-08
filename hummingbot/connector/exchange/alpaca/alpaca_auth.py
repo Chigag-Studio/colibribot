@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import base64
+import json
 from collections import OrderedDict
 
 from typing import (
@@ -41,11 +42,19 @@ class AlpacaAuth(AuthBase):
         return request
 
     async def ws_authenticate(self, request: WSRequest) -> WSRequest:
-        """
-        This method is intended to configure a websocket request to be authenticated. Binance does not use this
-        functionality
-        """
-        return request  # pass-through
+
+        #lyghtcode 2022
+
+        auth_data = {
+            "action": "authenticate",
+            "data": {"key_id": self.api_key, "secret_key": self.secret_key}
+        }
+
+        #might need to convert above with - json.dumps(auth_data) then pass in WSRequest
+
+        request = WSRequest(dict(action="authenticate", data={"key_id": self.api_key, "secret_key": self.secret_key}))
+
+        return request
 
     def add_auth_to_params(self,
                            params: Dict[str, Any]):

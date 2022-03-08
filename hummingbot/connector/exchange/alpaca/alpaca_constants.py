@@ -3,6 +3,10 @@
 from hummingbot.core.api_throttler.data_types import RateLimit
 #REQUIRED
 EXCHANGE_NAME = "alpaca"
+PAPER_URL ="https://paper-api.alpaca.markets/"
+PAPER_KEY ="PKH3PPQCW6GLS8CY166G"
+PAPER_SECRET = "F8adr3BjoEzEkfOKCoO3XxaW1KYtgpSkXgL6OpDx"
+
 REST_URL = "https://broker-api.alpaca.markets/"
 REST_URL_SANDBOX = "https://broker-api.sandbox.alpaca.markets/"
 WSS_URL = "wss://stream.data.alpaca.markets/v2/sip"
@@ -11,28 +15,28 @@ WSS_URL_SANDBOX = "wss://stream.data.alpaca.markets/v2/iex"
 #HBOT  Stuff
 HBOT_ORDER_ID_PREFIX = "x-XEKWYICX"
 
-#todo; add account id and remove order_id from suffix where located below
+#todo; figure out how to handle dynamic order_id variables or appened in request.
 
 # REST API ENDPOINTS
 CHECK_NETWORK_PATH_URL = "system/service"
-GET_ASSET_PATH_URL = "/v1/assets"
-GET_ASSET_SYMBOL_PATH_URL = "/v1/assets/:symbol"
+GET_ASSET_PATH_URL = "/v2/assets"
+GET_ASSET_SYMBOL_PATH_URL = "/v2/assets/:symbol"
 GET_TRADES_STATUS_PATH_URL = "/v1/events/trades"
-GET_ORDER_BOOK_PATH_URL = "/v1/trading/accounts/{account_id}/orders"
-CREATE_ORDER_PATH_URL = "/v1/trading/accounts/{account_id}/orders"
-DELETE_ORDER_PATH_URL = "/v1/trading/accounts/{account_id}/orders/{order_id}"
-GET_ORDER_DETAIL_PATH_URL = "/v1/trading/accounts/{account_id}/orders/{order_id}"
-PATCH_ORDER_PATH_URL = "/v1/trading/accounts/{account_id}/orders/{order_id}"
+GET_ORDER_BOOK_PATH_URL = "/v2/orders"
+CREATE_ORDER_PATH_URL = "/v2/orders"
+DELETE_ORDER_PATH_URL = "/v2/orders/{order_id}"
+GET_ORDER_DETAIL_PATH_URL = "/v2/orders/{order_id}"
+PATCH_ORDER_PATH_URL = "/v2/orders/{order_id}"
 #MISC FUNCTIONS
-GET_ACCOUNT_SUMMARY_PATH_URL = "/v1/accounts/{account_id}"
-GET_OPEN_ORDERS_PATH_URL = "/v1/trading/accounts/{account_id}/orders"
-DELETE_ALL_ORDERS_PATH_URL = "/v1/trading/accounts/{account_id}/orders/"
+GET_ACCOUNT_SUMMARY_PATH_URL = "/v2/account/"
+GET_OPEN_ORDERS_PATH_URL = "/v2/orders"
+DELETE_ALL_ORDERS_PATH_URL = "/v2/orders/"
 #POSITIONS
-GET_ALL_POSITIONS_PATH_URL = "/v1/trading/accounts/{account_id}/positions"
-DELETE_ALL_POSITIONS_PATH_URL = "/v1/trading/accounts/{account_id}/positions"
-DELETE_SPECIFIC_POSITION_PATH_URL = "/v1/trading/accounts/{account_id}/positions/{symbol}"
+GET_ALL_POSITIONS_PATH_URL = "/v2/positions"
+DELETE_ALL_POSITIONS_PATH_URL = "/v2/positions"
+DELETE_SPECIFIC_POSITION_PATH_URL = "/v2/positions/{symbol}"
 #PORTFOLIO HISTORY
-GET_PORTFOLIO_HISTORY_PATH_URL = "/v1/trading/accounts/{account_id}/account/portfolio/history"
+GET_PORTFOLIO_HISTORY_PATH_URL = "/v2/account/portfolio/history"
 
 # WS API ENDPOINTS
 WS_CONNECT = "WSConnect"
