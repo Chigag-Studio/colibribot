@@ -240,7 +240,7 @@ class AlpacaAPIOrderBookDataSource(OrderBookTrackerDataSource):
                 if "result" in json_msg:
                     continue
                 trading_pair = await AlpacaAPIOrderBookDataSource.trading_pair_associated_to_exchange_symbol(
-                    symbol=json_msg["s"],
+                    symbol=json_msg["symbol"],
                     domain=self._domain,
                     api_factory=self._api_factory,
                     throttler=self._throttler)
@@ -267,7 +267,7 @@ class AlpacaAPIOrderBookDataSource(OrderBookTrackerDataSource):
                 if "result" in json_msg:
                     continue
                 trading_pair = await AlpacaAPIOrderBookDataSource.trading_pair_associated_to_exchange_symbol(
-                    symbol=json_msg["s"],
+                    symbol=json_msg["symbol"],
                     domain=self._domain,
                     api_factory=self._api_factory,
                     throttler=self._throttler)
