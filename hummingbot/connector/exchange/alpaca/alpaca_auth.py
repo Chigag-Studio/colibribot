@@ -51,6 +51,8 @@ class AlpacaAuth():
         else:
             return {
                 "Content-Type": 'application/json',
+                "APCA-API-KEY-ID": self.api_key,
+                "APCA-API-SECRET-KEY": self.secret_key,
             }
 
     def get_ws_auth_payload(self, timestamp: int = None):

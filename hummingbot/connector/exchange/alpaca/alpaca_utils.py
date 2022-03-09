@@ -162,12 +162,6 @@ KEYS = {
                   required_if=using_exchange("alpaca"),
                   is_secure=True,
                   is_connect_key=True),
-    "alpaca_memo":
-        ConfigVar(key="alpaca_memo",
-                  prompt="Enter your Alpaca API Memo >>> ",
-                  required_if=using_exchange("alpaca"),
-                  is_secure=True,
-                  is_connect_key=True),
 }
 
 
