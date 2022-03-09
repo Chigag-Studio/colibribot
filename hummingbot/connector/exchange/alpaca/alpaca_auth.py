@@ -37,15 +37,15 @@ class AlpacaAuth():
 
             return {
                 "Content-Type": 'application/json',
-                "X-BM-KEY": self.api_key,
-                "X-BM-SIGN": sign,
-                "X-BM-TIMESTAMP": str(timestamp),
+                "APCA-API-KEY-ID": self.api_key,
+                "APCA-API-SECRET-KEY": self.secret_key,
+                # "X-BM-TIMESTAMP": str(timestamp),
             }
 
         elif auth_type == "KEYED":
             return {
                 "Content-Type": 'application/json',
-                "X-BM-KEY": self.api_key,
+                "APCA-API-SECRET-KEY": self.api_key,
             }
 
         else:
@@ -59,19 +59,14 @@ class AlpacaAuth():
         :return: a dictionary of auth headers with api_key, timestamp, signature
         """
 
-        payload = f'{str(timestamp)}#{self.memo}#alpaca.WebSocket'
-
-        sign = hmac.new(
-            self.secret_key.encode('utf-8'),
-            payload.encode('utf-8'),
-            hashlib.sha256
-        ).hexdigest()
+        # payload = f'{str(timestamp)}#{self.memo}#alpaca.WebSocket'
+        #
+        # sign = hmac.new(
+        #     self.secret_key.encode('utf-8'),
+        #     payload.encode('utf-8'),
+        #     hashlib.sha256
+        # ).hexdigest()
 
         return {
-            "op": "login",
-            "args": [
-                self.api_key,
-                str(timestamp),
-                sign
-            ]
+            {"action": "auth", "key": self.api_key, "secret": self.secret_key}
         }

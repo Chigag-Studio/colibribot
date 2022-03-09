@@ -93,10 +93,7 @@ class AlpacaAPIUserStreamDataSource(UserStreamTrackerDataSource):
         try:
             # Alpaca WebSocket API currently offers only spot/user/order private channel.
             for trading_pair in self._trading_pairs:
-                ws_message: WSRequest = WSRequest({
-                    "op": "subscribe",
-                    "args": [f"spot/user/order:{alpaca_utils.convert_to_exchange_trading_pair(trading_pair)}"]
-                })
+                ws_message: WSRequest = WSRequest({"action":"subscribe","trades":[trading_pair]})
                 await ws.send(ws_message)
 
         except asyncio.CancelledError:
