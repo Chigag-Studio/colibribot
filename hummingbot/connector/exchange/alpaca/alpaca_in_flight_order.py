@@ -72,6 +72,7 @@ class AlpacaInFlightOrder(InFlightOrderBase):
         #retval.fee_asset = data["fee_asset"]
         #retval.fee_paid = Decimal(data["fee_paid"])
         retval.last_state = data["status"]
+
         return retval
 
     def update_with_trade_update_rest(self, trade_update: Dict[str, Any]) -> Tuple[Decimal, Decimal, str]:
@@ -111,3 +112,4 @@ class AlpacaInFlightOrder(InFlightOrderBase):
         self.executed_amount_quote = executed_amount_quote
 
         return delta_trade_amount, delta_trade_price, trade_id
+
