@@ -5,7 +5,6 @@ from hummingbot.connector.exchange.alpaca.alpaca_order_book_message import Alpac
 from hummingbot.core.data_type.order_book import OrderBook
 from hummingbot.core.data_type.order_book_message import OrderBookMessageType
 
-#todo; lyghtccode below orderbook message has been completed and aligns with formatting of Alpaca API
 
 class AlpacaOrderBook(OrderBook):
 
@@ -45,10 +44,10 @@ class AlpacaOrderBook(OrderBook):
             msg.update(metadata)
 
         msg.update({
-            "exchange_order_id": str(msg.get("client_order_id")),
+            "exchange_order_id": str(msg.get("s_t")),
             "trade_type": msg.get("side"),
-            "price": msg.get("filled_avg_price"),
-            "amount": msg.get("qty"),
+            "price": msg.get("price"),
+            "amount": msg.get("size"),
         })
 
         return AlpacaOrderBookMessage(
