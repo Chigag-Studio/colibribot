@@ -26,7 +26,7 @@ class AlpacaAuth():
         if auth_type == "SIGNED":
 
             params = json.dumps(params)
-            payload = f'{str(timestamp)}#{self.memo}#{params}'
+            payload = f'{str(timestamp)}#{params}'
 
             sign = hmac.new(
                 self.secret_key.encode('utf-8'),
@@ -44,7 +44,8 @@ class AlpacaAuth():
         elif auth_type == "KEYED":
             return {
                 "Content-Type": 'application/json',
-                "APCA-API-SECRET-KEY": self.api_key,
+                "APCA-API-KEY-ID": self.api_key,
+                "APCA-API-SECRET-KEY": self.secret_key,
             }
 
         else:
