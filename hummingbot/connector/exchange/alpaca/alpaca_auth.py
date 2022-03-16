@@ -35,7 +35,7 @@ class AlpacaAuth():
             ).hexdigest()
 
             return {
-                "Content-Type": 'application/json',
+                # "Content-Type": 'application/json',
                 "APCA-API-KEY-ID": self.api_key,
                 "APCA-API-SECRET-KEY": self.secret_key,
                 # "X-BM-TIMESTAMP": str(timestamp),
@@ -43,14 +43,14 @@ class AlpacaAuth():
 
         elif auth_type == "KEYED":
             return {
-                "Content-Type": 'application/json',
+                # "Content-Type": 'application/json',
                 "APCA-API-KEY-ID": self.api_key,
                 "APCA-API-SECRET-KEY": self.secret_key,
             }
 
         else:
             return {
-                "Content-Type": 'application/json',
+                # "Content-Type": 'application/json',
                 "APCA-API-KEY-ID": self.api_key,
                 "APCA-API-SECRET-KEY": self.secret_key,
             }
