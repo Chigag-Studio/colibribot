@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+npm-debug.log
+.git
+
+# Configuration files
+conf/*
+# except the example conf/global_conf.yml.example
+!conf/global_conf.yml.example
+
+# Gateway API files
+*.pem
