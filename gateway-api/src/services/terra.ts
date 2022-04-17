@@ -21,6 +21,7 @@ export const TERRA_TOKENS: Record<string, string> = {
   ukrw: 'KRT',
   usdr: 'SDT',
   umnt: 'MNT',
+  terra1aa00lpfexyycedfg5k2p60l9djcmw0ue5l8fhc: 'mSPY',
 };
 
 export const DENOM_UNIT = 10 ** 6;

@@ -86,7 +86,7 @@ class TerraConnector(ConnectorBase):
     async def fetch_trading_pairs() -> List[str]:
         return ["LUNA-UST", "LUNA-KRT", "LUNA-SDT", "LUNA-MNT",
                 "UST-KRT", "UST-SDT", "UST-MNT",
-                "KRT-SDT", "KRT-MNT", "SDT-MNT"]
+                "KRT-SDT", "KRT-MNT", "SDT-MNT","UST-mSPY"]
 
     @property
     def limit_orders(self) -> List[LimitOrder]:
