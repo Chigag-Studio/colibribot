@@ -17,6 +17,8 @@ from hummingbot.connector.exchange.ascend_ex.ascend_ex_utils import convert_from
 from hummingbot.connector.exchange.binance.binance_api_order_book_data_source import BinanceAPIOrderBookDataSource
 from hummingbot.connector.exchange.kucoin.kucoin_utils import convert_from_exchange_trading_pair as \
     kucoin_convert_from_exchange_pair
+from hummingbot.connector.exchange.ftx.ftx_utils import convert_from_exchange_trading_pair as \
+    ftx_convert_from_exchange_pair
 from hummingbot.core.network_base import NetworkBase
 from hummingbot.core.network_iterator import NetworkStatus
 from hummingbot.core.rate_oracle.utils import find_rate
@@ -57,6 +59,7 @@ class RateOracle(NetworkBase):
                               "&per_page=250&page={}&sparkline=false"
     coingecko_supported_vs_tokens_url = "https://api.coingecko.com/api/v3/simple/supported_vs_currencies"
     kucoin_price_url = "https://api.kucoin.com/api/v1/market/allTickers"
+    ftx_price_url = "https://ftx.com/api/markets"
     ascend_ex_price_url = "https://ascendex.com/api/pro/v1/ticker"
 
     @classmethod
@@ -180,6 +183,8 @@ class RateOracle(NetworkBase):
             return await cls.get_coingecko_prices(cls.global_token)
         elif cls.source == RateOracleSource.kucoin:
             return await cls.get_kucoin_prices()
+        elif cls.source == RateOracleSource.ftxcoin:
+            return await cls.get_ftx_prices()
         elif cls.source == RateOracleSource.ascend_ex:
             return await cls.get_ascend_ex_prices()
         else:
@@ -257,6 +262,23 @@ class RateOracle(NetworkBase):
                 pair = kucoin_convert_from_exchange_pair(record["symbolName"])
                 if Decimal(record["buy"]) > 0 and Decimal(record["sell"]) > 0:
                     results[pair] = (Decimal(str(record["buy"])) + Decimal(str(record["sell"]))) / Decimal("2")
+        return results
+
+    @classmethod
+    @async_ttl_cache(ttl=1, maxsize=1)
+    async def get_ftx_prices(cls) -> Dict[str, Decimal]:
+        """
+        Fetches FTX mid prices from their markets endpoint.
+        :return A dictionary of trading pairs and prices
+        """
+        results = {}
+        client = await cls._http_client()
+        async with client.request("GET", cls.ftx_price_url) as resp:
+            records = await resp.json(content_type=None)
+            for record in records["data"]:
+                pair = ftx_convert_from_exchange_pair(record["name"])
+                if Decimal(record["ask"]) > 0 and Decimal(record["bid"]) > 0:
+                    results[pair] = (Decimal(str(record["ask"])) + Decimal(str(record["bid"]))) / Decimal("2")
         return results
 
     @classmethod
