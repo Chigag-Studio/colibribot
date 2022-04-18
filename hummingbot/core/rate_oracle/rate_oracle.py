@@ -35,6 +35,7 @@ class RateOracleSource(Enum):
     coingecko = 1
     kucoin = 2
     ascend_ex = 3
+    ftx = 4
 
 
 class RateOracle(NetworkBase):
@@ -183,7 +184,7 @@ class RateOracle(NetworkBase):
             return await cls.get_coingecko_prices(cls.global_token)
         elif cls.source == RateOracleSource.kucoin:
             return await cls.get_kucoin_prices()
-        elif cls.source == RateOracleSource.ftxcoin:
+        elif cls.source == RateOracleSource.ftx:
             return await cls.get_ftx_prices()
         elif cls.source == RateOracleSource.ascend_ex:
             return await cls.get_ascend_ex_prices()
